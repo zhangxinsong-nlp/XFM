@@ -1,0 +1,43 @@
+train_file: ['../data/finetune/vqa_train.json',
+             '../data/finetune/vqa_val.json',
+             '../data/finetune/vg_qa.json']
+
+test_file: ['../data/finetune/vqa_test.json']
+answer_list: '../data/finetune/answer_list.json'
+
+vqa_root: '../images/coco/'
+vg_root: '../images/visualgenome/'
+
+## Vision Encoder
+# use_clip_vit: True
+# vision_config: 'configs/model/config_clipvitB.json'  # use 2 layer local-attn to get region representations
+# image_res: 480
+# patch_size: 16
+
+use_beit_v2: True
+vision_config: 'configs/model/config_beit2_base.json'
+image_res: 480
+patch_size: 16
+local_attn_depth: -1
+
+## Text Encoder (& Cross Encoder)
+text_encoder: '../data/roberta-base'
+text_num_hidden_layers: 12
+text_fusion_start_at: 12
+fusion_num_hidden_layers: 12
+fusion_fusion_start_at: 0
+num_dec_layers: 12  # X-Brain uses 12L cross-modal decoder
+decoder_fusion_start_at: 0
+
+## Training
+batch_size_train: 24
+batch_size_test: 32
+max_tokens: 40
+k_test: 128
+accumulation_steps: 1
+
+
+## Other Settings
+optimizer: {opt: adamW, lr: 2e-5, weight_decay: 0.01, lr_mult: 2}
+schedular: {sched: linear, lr: 2e-5, epochs: 10, num_warmup_steps: 0.1}
+start_eval: 2  # epoch index

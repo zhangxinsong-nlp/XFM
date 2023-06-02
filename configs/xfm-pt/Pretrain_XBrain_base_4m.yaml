@@ -1,0 +1,119 @@
+## Data
+train_file: [
+    # "FILES",
+]
+
+train_dataset_size: 5114489 # for IterableDataset
+images: {image_key: "binary",
+         is_image_rpath: False, # read path or base64 encoding
+         caption_key: "desc",
+         tokenized: False,  # whether texts have been tokenized
+         batch_size: 96,  # 128 x 24 = 3072
+         num_workers: 4,  # better -> the total number of training files % (world_size * num_workers) == 0
+}
+
+train_file_regions: [
+    # "FILES",
+]
+regions: {image_key: "binary", is_image_rpath: False, caption_key: "caption", tokenized: True,
+          iter_perc: 1.0, batch_size: 96, max_images: 80, max_regions: 5, min_perc_in_image: 0.5, num_workers: 2}
+ret_bbox_loss: True
+ret_bbox_giou: True
+
+
+train_file_imagenet: [ 
+                # "FILES",
+            ]
+images_imagenet: {image_key: "binary",
+            is_image_rpath: False, # read path or base64 encoding
+            caption_key: "desc",
+            tokenized: False,  # whether texts have been tokenized
+            batch_size: 96,  # 128 x 8 = 1024
+            num_workers: 4,  # better -> the total number of training files % (world_size * num_workers) == 0
+}
+
+train_file_text: [
+#   "FILES"
+]
+texts: {text_key: "desc",
+        tokenized: False,  # whether texts have been tokenized
+        iter_perc: 1.0,
+        batch_size: 256,  # 128 x 24 = 3072
+        num_workers: 4,  # better -> the total number of training files % (world_size * num_workers) == 0
+        max_words: 128,
+        max_tokens: 128,
+        mask_prob: 0.15,
+        max_masks: 20,
+        use_lm_loss: False,  # default: mlm
+        mask_whole_word: True
+}
+
+
+## Vision Encoder
+# use_clip_vit: False
+# vision_config: 'configs/model/config_clipvitB.json'
+# image_res: 224
+# patch_size: 16
+
+
+# use_swin: True
+# vision_config: 'configs/model/config_swinB_224.json'
+# image_res: 224
+# patch_size: 32
+
+use_beit_v2: True
+vision_config: 'configs/model/config_beit2_base.json'
+image_res: 224
+patch_size: 16
+local_attn_depth: -1
+
+## Text Encoder (& Cross Encoder)
+text_encoder: '../data/roberta-base'
+text_num_hidden_layers: 12
+text_fusion_start_at: 12
+fusion_num_hidden_layers: 12
+fusion_fusion_start_at: 0
+
+
+## Training
+use_xbrain: True
+wregion: 1.0
+wweb: 1.0
+wimagenet: 1.0
+wimage: 1.0
+waux: 1.0
+num_masking_patches: 75
+min_num_patches: 16
+
+calc_image_bbox_loss: False
+embed_dim: 256
+temp: 0.07
+learnable_temp: True
+max_temp: 0.5
+min_temp: 0.001
+
+max_words: 30
+max_tokens: 30
+mask_prob: 0.5
+max_masks: 15
+mask_whole_word: False
+skipgram_prb: 0.2
+skipgram_size: 3
+print_broken_data: False
+train_from_scratch: False
+resume: False
+
+
+## Other Settings
+ckpt_frequent_step: 50000
+ckpt_frequent: 5  # epoch
+optimizer: {opt: adamW, lr: 1e-4, weight_decay: 0.01, lr_mult: 2}
+schedular: {sched: linear, lr: 1e-4, epochs: 100, num_warmup_steps: 2500}
+accelerator: {ACCELERATOR: ApexDDP, AUTO_CAST: false, SYNCBN: false, FP16_OPT_LEVEL: O1, FP16_LOSS_SCALE: dynamic, RNG_SEED: 42, GRAD_ACCUMULATE_STEPS: 1, CLIP_GRAD_NORM: 1.0}
+
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+train_file:  ['../data/finetune/coco_train.json']
+val_file: '../data/finetune/coco_val.json'
+test_file: '../data/finetune/coco_test.json'
+image_root: '../images/coco/'
+
+
+## Vision Encoder
+# use_clip_vit: False
+# vision_config: 'configs/model/config_clipvitB.json'
+# image_res: 384
+# patch_size: 16
+
+# use_swin: True
+# vision_config: 'configs/model/config_swinB_384.json'
+# image_res: 384
+# patch_size: 32
+
+use_beit_v2: True
+vision_config: 'configs/model/config_beit2_base.json'
+image_res: 384
+patch_size: 16
+local_attn_depth: -1
+
+## Text Encoder (& Cross Encoder)
+text_encoder: '../data/roberta-base'
+text_num_hidden_layers: 12
+text_fusion_start_at: 12
+fusion_num_hidden_layers: 12
+fusion_fusion_start_at: 0
+
+
+## Training
+batch_size_train: 32
+batch_size_test: 64
+batch_size_test_text: 64
+max_tokens: 40
+embed_dim: 256
+temp: 0.07
+k_test: 256
+accumulation_steps: 1
+
+
+## Other Settings
+optimizer: {opt: adamW, lr: 3e-5, weight_decay: 0.01, lr_mult: 2}
+schedular: {sched: linear, lr: 3e-5, epochs: 20, num_warmup_steps: 0.1}
+
