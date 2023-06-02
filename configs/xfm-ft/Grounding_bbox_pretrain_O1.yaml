@@ -1,0 +1,50 @@
+train_file_regions: [
+    # 'FILES',
+]
+
+train_dataset_size: 318547
+regions: {image_key: "binary", is_image_rpath: False, caption_key: "caption", tokenized: True, careful_hflip: True,
+          iter_perc: 1.0, batch_size: 64, max_images: 28, max_regions: 5, min_perc_in_image: 0.5, num_workers: 4}
+
+
+## you need to download data for finetuing tasks
+
+refcoco_data: '../data/finetune/'
+det_file: '../data/finetune/refcoco+/dets.json'
+coco_file: '../data/finetune/refcoco+/cocos.json'
+image_root: '../images/coco/'
+
+
+## Vision Encoder
+use_beit_v2: True
+vision_config: 'configs/model/config_beit2_base.json'
+image_res: 224
+patch_size: 16
+local_attn_depth: -1
+
+## Text Encoder (& Cross Encoder)
+text_encoder: '../data/roberta-base'
+text_num_hidden_layers: 12
+text_fusion_start_at: 12
+fusion_num_hidden_layers: 12
+fusion_fusion_start_at: 0
+
+## Training
+calc_image_bbox_loss: False
+
+max_words: 40
+max_tokens: 40
+#### these will not be activated
+mask_whole_word: True
+mask_prob: 0.25
+max_masks: 8
+skipgram_prb: 0.2
+skipgram_size: 3
+####
+
+
+## Other Settings
+optimizer: {opt: adamW, lr: 3e-5, weight_decay: 0.01, lr_mult: 2}
+schedular: {sched: linear, lr: 3e-5, epochs: 2, num_warmup_steps: 0.1}
+accelerator: {ACCELERATOR: ApexDDP, AUTO_CAST: false, SYNCBN: false, FP16_OPT_LEVEL: O1, FP16_LOSS_SCALE: dynamic, RNG_SEED: 42, GRAD_ACCUMULATE_STEPS: 1, CLIP_GRAD_NORM: 1.0}
+
