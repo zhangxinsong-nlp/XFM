@@ -40,8 +40,8 @@ Other performance:
 
 
 ### Pre-Trained Checkpoints
-[XFM 1.3B model](https://drive.google.com/file/d/1mM0w4uJW-UdKmXCwIZRWA1hdOuB74s_m/view?usp=sharing) (Recommended)  
-[XFM 4M model](https://drive.google.com/file/d/1hTtKxlKLUpw_csR_c_xBRkmOBRCHHY5M/view?usp=sharing) 
+[XFM 1.3B (pre-training data) model](https://drive.google.com/file/d/1mM0w4uJW-UdKmXCwIZRWA1hdOuB74s_m/view?usp=sharing) (Recommended)  
+[XFM 4M (pre-training data) model](https://drive.google.com/file/d/1hTtKxlKLUpw_csR_c_xBRkmOBRCHHY5M/view?usp=sharing) 
 
 ### Finetuning Examples
 ```
