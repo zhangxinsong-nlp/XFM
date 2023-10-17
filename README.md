@@ -2,10 +2,11 @@
 
 **[Toward Building General Foundation Models for Language, Vision, and Vision-Language Understanding Tasks](https://arxiv.org/abs/2301.05065). Xinsong Zhang, Yan Zeng, Jipeng Zhang, Hang Li. arXiv 2023.**
 
+- October 2023: X-FM is accepted by EMNLP2023 Findings. We have updated our paper in [arXiv](https://arxiv.org/abs/2301.05065)
 - May 2023: Release the official PyTorch implementation and XFM checkpoints. Note that we are releasing a new version of XFM trained with 1.3B data. Performance is shown below, which has not been updated in the ARXIV paper due to the paper review policy.
 - Jan 2023: Release preprint in [arXiv](https://arxiv.org/abs/2301.05065)
 
-XFM Base Size Model Performance (327M parameters). XFM is the BEST base size model in the following tasks:
+XFM Base Size Model Performance (327M parameters). XFM is the BEST base size model for the following tasks:
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/toward-building-general-foundation-models-for/cross-modal-retrieval-on-coco-2014)](https://paperswithcode.com/sota/cross-modal-retrieval-on-coco-2014?p=toward-building-general-foundation-models-for)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/toward-building-general-foundation-models-for/visual-reasoning-on-nlvr2-dev)](https://paperswithcode.com/sota/visual-reasoning-on-nlvr2-dev?p=toward-building-general-foundation-models-for)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/toward-building-general-foundation-models-for/visual-reasoning-on-nlvr2-test)](https://paperswithcode.com/sota/visual-reasoning-on-nlvr2-test?p=toward-building-general-foundation-models-for)
@@ -14,7 +15,7 @@ XFM Base Size Model Performance (327M parameters). XFM is the BEST base size mod
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/toward-building-general-foundation-models-for/visual-grounding-on-refcoco-test-b)](https://paperswithcode.com/sota/visual-grounding-on-refcoco-test-b?p=toward-building-general-foundation-models-for)
 
 
-General Performace compared with other foundation models.
+General performance compared with other foundation models.
 <div align="center">
   <img width="70%" src="xfm-1.png">
 </div>
@@ -64,7 +65,7 @@ python3 run.py --task "imagenet" --dist "all" --config "./configs/xfm-ft/imagene
 
 
 ## Citation
-If you find this repository useful, please considering giving ⭐ or citing:
+If you find this repository useful, please consider giving ⭐ or citing:
 ```
 @article{zhang2023toward,
   title={Toward Building General Foundation Models for Language, Vision, and Vision-Language Understanding Tasks},
